@@ -1,59 +1,53 @@
-package com.dedsafio;
+package com.dedsafio.mixin;
 
+import com.dedsafio.ChangesConfig;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.GoalSelector;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Box;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
-
-public class PassiveMobHandler {
-
-	private static int tickCounter = 0;
-
-	public static void onServerTick(ServerWorld world) {
-		// Solo ejecutar cada 10 ticks (0.5 segundos)
-		tickCounter++;
-		if (tickCounter < 10) {
-			return;
-		}
-		tickCounter = 0;
-
-		// Si los mobs pacíficos no están agresivos, no hacer nada
-		if (!ChangesConfig.areMobsPacificosAgresivos()) {
-			return;
-		}
-
-		// Iterar sobre todos los jugadores en el mundo
-		for (PlayerEntity player : world.getPlayers()) {
-			// Buscar mobs pacíficos cerca del jugador (10 bloques)
-			Box searchBox = player.getBoundingBox().expand(10.0);
-			List<LivingEntity> nearbyEntities = world.getEntitiesByClass(
-				LivingEntity.class,
-				searchBox,
-				entity -> isPassiveMob(entity) && entity.isAlive()
-			);
-
-			// Para cada mob pacífico cercano
-			for (LivingEntity mob : nearbyEntities) {
-				// Si está lo suficientemente cerca (2 bloques) y el mob puede ver al jugador
-				if (mob.squaredDistanceTo(player) <= 4.0 && mob.canSee(player)) {
-					// Aplicar daño al jugador
-					float damage = ChangesConfig.getDañoMobsPacificos();
-					if (damage > 0) {
-						DamageSource damageSource = mob.getDamageSources().mobAttack(mob);
-						player.damage(damageSource, damage);
-					}
-				}
+@Mixin(MobEntity.class)
+public class MobEntityMixin {
+	
+	@Shadow @Final protected GoalSelector goalSelector;
+	@Shadow @Final protected GoalSelector targetSelector;
+	
+	@Unique
+	private boolean dedsafio_hasAddedAggressiveGoals = false;
+	
+	@Inject(method = "tick", at = @At("HEAD"))
+	private void onTick(CallbackInfo ci) {
+		MobEntity mob = (MobEntity) (Object) this;
+		
+		// Si los mobs pacíficos deben ser agresivos y este es un mob pacífico
+		if (ChangesConfig.areMobsPacificosAgresivos() && isPassiveMob(mob) && !dedsafio_hasAddedAggressiveGoals) {
+			try {
+				// Agregar goals de ataque y targeting
+				targetSelector.add(1, new ActiveTargetGoal<>(mob, PlayerEntity.class, true));
+				dedsafio_hasAddedAggressiveGoals = true;
+			} catch (Exception e) {
+				// Algunos mobs pueden no soportar estos goals
 			}
 		}
+		
+		// Si los mobs pacíficos ya no deben ser agresivos, resetear
+		if (!ChangesConfig.areMobsPacificosAgresivos() && dedsafio_hasAddedAggressiveGoals) {
+			dedsafio_hasAddedAggressiveGoals = false;
+		}
 	}
-
-	private static boolean isPassiveMob(LivingEntity entity) {
+	
+	@Unique
+	private boolean isPassiveMob(MobEntity entity) {
 		EntityType<?> type = entity.getType();
 		Identifier id = Registries.ENTITY_TYPE.getId(type);
 		String name = id.toString();

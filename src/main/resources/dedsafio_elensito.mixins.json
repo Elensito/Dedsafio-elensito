@@ -6,8 +6,12 @@
 	"mixins": [],
 	"server": [
 		"ButtonBlockMixin",
+		"CocoaBlockMixin",
 		"CropBlockMixin",
-		"LivingEntityMixin"
+		"LivingEntityMixin",
+		"MobEntityMixin",
+		"NetherWartBlockMixin",
+		"StemBlockMixin"
 	],
 	"client": [
 		"LivingEntityMixin"
