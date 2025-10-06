@@ -13,8 +13,9 @@ public class DedsafioElensitoMod implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("DedsafioElensito mod initializing...");
 
-		// Load configuration
+		// Load configurations
 		DamageConfig.loadConfig();
+		ChangesConfig.loadConfig();
 
 		// Register damage event handler
 		DamageHandler.register();

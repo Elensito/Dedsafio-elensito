@@ -27,14 +27,17 @@ public class DedsafioElensitoCommand {
 		try {
 			// Reload damage configuration
 			DamageConfig.loadConfig();
+			
+			// Reload changes configuration (button damage)
+			ChangesConfig.loadConfig();
 
 			// Send success message
 			source.sendFeedback(
-				() -> Text.literal("§a[DedsafioElensito] Damage multiplier config reloaded successfully!"),
+				() -> Text.literal("§a[DedsafioElensito] All configurations reloaded successfully!"),
 				true
 			);
 
-			DedsafioElensitoMod.LOGGER.info("Configuration reloaded by {}", source.getName());
+			DedsafioElensitoMod.LOGGER.info("All configurations reloaded by {}", source.getName());
 
 			return 1; // Success
 		} catch (Exception e) {
@@ -95,7 +98,23 @@ public class DedsafioElensitoCommand {
 				false
 			);
 			source.sendFeedback(
-				() -> Text.literal("§7Use §f/dedsafio_elensito reload §7to reload config"),
+				() -> Text.literal("§e§lButton Damage System:"),
+				false
+			);
+			source.sendFeedback(
+				() -> Text.literal("§7  ✓ Configurable damage when pressing buttons"),
+				false
+			);
+			source.sendFeedback(
+				() -> Text.literal("§7  ✓ Config: §fconfig/dedsafio_elensito_changes.json"),
+				false
+			);
+			source.sendFeedback(
+				() -> Text.literal(""),
+				false
+			);
+			source.sendFeedback(
+				() -> Text.literal("§7Use §f/dedsafio_elensito reload §7to reload all configs"),
 				false
 			);
 			source.sendFeedback(
