@@ -1,0 +1,107 @@
+{
+  "_comment": "DedsafioElensito - Damage Multiplier Configuration",
+  "_comment2": "1.0 = 100% damage (normal), 0.5 = 50% (half), 2.0 = 200% (double), 0.0 = 0% (immunity)",
+  "_comment3": "Only entities that can deal damage are listed here",
+  
+  "entity_multipliers": {
+    "_comment_zombies": "=== ZOMBIES ===",
+    "minecraft:zombie": 1.0,
+    "minecraft:zombie_villager": 1.0,
+    "minecraft:husk": 1.0,
+    "minecraft:drowned": 1.0,
+    
+    "_comment_skeletons": "=== SKELETONS ===",
+    "minecraft:skeleton": 1.0,
+    "minecraft:stray": 1.0,
+    "minecraft:wither_skeleton": 1.0,
+    
+    "_comment_spiders": "=== SPIDERS ===",
+    "minecraft:spider": 1.0,
+    "minecraft:cave_spider": 1.0,
+    
+    "_comment_creepers": "=== CREEPERS ===",
+    "minecraft:creeper": 1.5,
+    
+    "_comment_enderman": "=== ENDERMAN & RELATED ===",
+    "minecraft:enderman": 1.0,
+    "minecraft:endermite": 1.0,
+    
+    "_comment_nether": "=== NETHER MOBS ===",
+    "minecraft:blaze": 1.0,
+    "minecraft:ghast": 1.0,
+    "minecraft:magma_cube": 1.0,
+    "minecraft:hoglin": 1.0,
+    "minecraft:zoglin": 1.0,
+    "minecraft:piglin": 1.0,
+    "minecraft:piglin_brute": 1.0,
+    
+    "_comment_illagers": "=== ILLAGERS (Pillagers, Vindicators, etc.) ===",
+    "minecraft:pillager": 1.0,
+    "minecraft:vindicator": 1.0,
+    "minecraft:evoker": 1.0,
+    "minecraft:vex": 1.0,
+    "minecraft:ravager": 1.0,
+    
+    "_comment_aquatic": "=== AQUATIC HOSTILE ===",
+    "minecraft:guardian": 1.0,
+    "minecraft:elder_guardian": 1.0,
+    
+    "_comment_other": "=== OTHER HOSTILE ===",
+    "minecraft:silverfish": 1.0,
+    "minecraft:slime": 1.0,
+    "minecraft:witch": 1.0,
+    "minecraft:phantom": 1.0,
+    "minecraft:shulker": 1.0,
+    
+    "_comment_bosses": "=== BOSSES ===",
+    "minecraft:ender_dragon": 1.0,
+    "minecraft:wither": 1.0,
+    "minecraft:warden": 1.0,
+    
+    "_comment_neutral": "=== NEUTRAL MOBS (Can deal damage when provoked) ===",
+    "minecraft:bee": 1.0,
+    "minecraft:wolf": 1.0,
+    "minecraft:iron_golem": 1.0,
+    "minecraft:polar_bear": 1.0,
+    "minecraft:llama": 1.0,
+    "minecraft:trader_llama": 1.0,
+    "minecraft:panda": 1.0,
+    "minecraft:dolphin": 1.0,
+    "minecraft:goat": 1.0
+  },
+  
+  "environmental_multipliers": {
+    "_comment_fall": "=== FALL & COLLISION ===",
+    "fall": 1.0,
+    "fly_into_wall": 1.0,
+    "in_wall": 1.0,
+    "cramming": 1.0,
+    
+    "_comment_fire": "=== FIRE & HEAT ===",
+    "fire": 1.0,
+    "lava": 1.0,
+    "hot_floor": 1.0,
+    
+    "_comment_water": "=== WATER ===",
+    "drown": 1.0,
+    
+    "_comment_weather": "=== WEATHER ===",
+    "lightning": 1.0,
+    "freeze": 1.0,
+    
+    "_comment_blocks": "=== BLOCK DAMAGE ===",
+    "cactus": 1.0,
+    "sweet_berry_bush": 1.0,
+    "anvil": 1.0,
+    "falling_block": 1.0,
+    
+    "_comment_effects": "=== STATUS EFFECTS ===",
+    "starve": 1.0,
+    "wither": 1.0,
+    "magic": 1.0,
+    "dragon_breath": 1.0,
+    
+    "_comment_explosion": "=== EXPLOSIONS ===",
+    "explosion": 1.0
+  }
+}

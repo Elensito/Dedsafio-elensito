@@ -1,0 +1,42 @@
+{
+  "_comment": "DedsafioElensito - Spawn Control Configuration",
+  "_comment2": "true = animal can spawn naturally, false = animal CANNOT spawn naturally",
+  "_comment3": "Note: Animals can still spawn with spawn eggs, commands, or breeding",
+  
+  "food_animals_spawn_control": {
+    "_comment_passive": "=== PASSIVE ANIMALS (Food Sources) ===",
+    "minecraft:cow": false,
+    "minecraft:pig": false,
+    "minecraft:sheep": false,
+    "minecraft:chicken": false,
+    "minecraft:rabbit": false,
+    "minecraft:mooshroom": false,
+    
+    "_comment_aquatic": "=== AQUATIC ANIMALS (Fish) ===",
+    "minecraft:cod": false,
+    "minecraft:salmon": false,
+    "minecraft:tropical_fish": false,
+    "minecraft:pufferfish": false,
+    
+    "_comment_utility": "=== UTILITY ANIMALS (Not primarily for food) ===",
+    "minecraft:horse": true,
+    "minecraft:donkey": true,
+    "minecraft:mule": true,
+    "minecraft:llama": true,
+    "minecraft:trader_llama": true,
+    "minecraft:cat": true,
+    "minecraft:wolf": true,
+    "minecraft:parrot": true,
+    "minecraft:ocelot": true,
+    "minecraft:fox": true,
+    
+    "_comment_other": "=== OTHER ===",
+    "minecraft:squid": false,
+    "minecraft:glow_squid": false,
+    "minecraft:turtle": true,
+    "minecraft:axolotl": true,
+    "minecraft:bee": true,
+    "minecraft:panda": true,
+    "minecraft:polar_bear": true
+  }
+}

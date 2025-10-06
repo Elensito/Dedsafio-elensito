@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "dedsafio_elensito",
+	"version": "${version}",
+	"name": "DedsafioElensito",
+	"description": "A challenging mod that allows you to modify damage multipliers for all hostile mobs, bosses, and environmental damage sources to make the game more difficult",
+	"authors": [
+		"Your Name"
+	],
+	"contact": {},
+	"license": "MIT",
+	"icon": "assets/dedsafio_elensito/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.dedsafio.DedsafioElensitoMod"
+		]
+	},
+	"mixins": [
+		"dedsafio_elensito.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.0",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

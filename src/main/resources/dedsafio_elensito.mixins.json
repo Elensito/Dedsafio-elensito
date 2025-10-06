@@ -1,0 +1,16 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "com.dedsafio.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [],
+	"server": [
+		"LivingEntityMixin"
+	],
+	"client": [
+		"LivingEntityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
