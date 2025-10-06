@@ -26,6 +26,15 @@ public class DamageHandler {
 			Identifier entityId = Registries.ENTITY_TYPE.getId(entityType);
 			String entityName = entityId.toString();
 
+			// Check if it's a passive mob dealing damage
+			if (ChangesConfig.areMobsPacificosAgresivos() && isPassiveMob(entityName)) {
+				// Use the configured damage for passive mobs instead of multiplier
+				float passiveDamage = ChangesConfig.getDañoMobsPacificos();
+				DedsafioElensitoMod.LOGGER.debug("Passive mob damage from {}: {} -> {} (configured)",
+					entityName, originalAmount, passiveDamage);
+				return passiveDamage;
+			}
+
 			if (DamageConfig.hasEntityMultiplier(entityName)) {
 				multiplier = DamageConfig.getEntityMultiplier(entityName);
 				DedsafioElensitoMod.LOGGER.debug("Entity damage from {}: {} -> {} (x{})",
@@ -89,5 +98,32 @@ public class DamageHandler {
 		}
 
 		return typeName.toLowerCase();
+	}
+
+	/**
+	 * Check if an entity is a passive mob
+	 */
+	private static boolean isPassiveMob(String entityName) {
+		return entityName.equals("minecraft:cow") ||
+			   entityName.equals("minecraft:pig") ||
+			   entityName.equals("minecraft:sheep") ||
+			   entityName.equals("minecraft:chicken") ||
+			   entityName.equals("minecraft:rabbit") ||
+			   entityName.equals("minecraft:horse") ||
+			   entityName.equals("minecraft:donkey") ||
+			   entityName.equals("minecraft:mule") ||
+			   entityName.equals("minecraft:camel") ||
+			   entityName.equals("minecraft:cat") ||
+			   entityName.equals("minecraft:parrot") ||
+			   entityName.equals("minecraft:axolotl") ||
+			   entityName.equals("minecraft:squid") ||
+			   entityName.equals("minecraft:glow_squid") ||
+			   entityName.equals("minecraft:turtle") ||
+			   entityName.equals("minecraft:sniffer") ||
+			   entityName.equals("minecraft:frog") ||
+			   entityName.equals("minecraft:allay") ||
+			   entityName.equals("minecraft:villager") ||
+			   entityName.equals("minecraft:wandering_trader") ||
+			   entityName.equals("minecraft:strider");
 	}
 }

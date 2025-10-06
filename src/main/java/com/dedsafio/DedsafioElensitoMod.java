@@ -2,6 +2,7 @@ package com.dedsafio;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,11 @@ public class DedsafioElensitoMod implements ModInitializer {
 
 		// Register damage event handler
 		DamageHandler.register();
+
+		// Register passive mob handler for server tick
+		ServerTickEvents.END_WORLD_TICK.register(world -> {
+			PassiveMobHandler.onServerTick(world);
+		});
 
 		// Register commands
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {

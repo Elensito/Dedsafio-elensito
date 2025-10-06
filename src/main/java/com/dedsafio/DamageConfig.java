@@ -22,6 +22,10 @@ public class DamageConfig {
 	// Map for environmental damage multipliers (damage type -> multiplier)
 	private static Map<String, Double> environmentalMultipliers = new HashMap<>();
 
+	// Difficulty changes
+	private static double buttonDamage = 0.0;
+	private static boolean radiationEnabled = false;
+
 	public static void loadConfig() {
 		if (!CONFIG_FILE.getParentFile().exists()) {
 			CONFIG_FILE.getParentFile().mkdirs();
@@ -58,6 +62,17 @@ public class DamageConfig {
 						environmentalMultipliers.put(entry.getKey(), entry.getValue().getAsDouble());
 					}
 				});
+			}
+
+			// Load difficulty changes
+			if (config.has("difficulty_changes")) {
+				JsonObject difficulty = config.getAsJsonObject("difficulty_changes");
+				if (difficulty.has("button_damage")) {
+					buttonDamage = difficulty.get("button_damage").getAsDouble();
+				}
+				if (difficulty.has("radiation")) {
+					radiationEnabled = difficulty.get("radiation").getAsBoolean();
+				}
 			}
 
 			DedsafioElensitoMod.LOGGER.info("Configuration loaded successfully! " +
@@ -150,6 +165,12 @@ public class DamageConfig {
 		environmental.addProperty("explosion", 1.0);
 		config.add("environmental_multipliers", environmental);
 
+		// Default difficulty changes
+		JsonObject difficulty = new JsonObject();
+		difficulty.addProperty("button_damage", 0.0); // Damage dealt when pressing buttons
+		difficulty.addProperty("radiation", false); // If true, crops don't grow naturally
+		config.add("difficulty_changes", difficulty);
+
 		try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
 			GSON.toJson(config, writer);
 			DedsafioElensitoMod.LOGGER.info("Default configuration created!");
@@ -172,5 +193,13 @@ public class DamageConfig {
 
 	public static boolean hasEnvironmentalMultiplier(String damageType) {
 		return environmentalMultipliers.containsKey(damageType);
+	}
+
+	public static double getButtonDamage() {
+		return buttonDamage;
+	}
+
+	public static boolean isRadiationEnabled() {
+		return radiationEnabled;
 	}
 }

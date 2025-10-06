@@ -18,7 +18,7 @@
 2. Los archivos de configuración se crearán automáticamente en `config/`
 3. ¡Juega!
 
-## 📁 Archivo de Configuración
+## 📁 Archivos de Configuración
 
 ### `config/dedsafio_elensito_multiplicador.json`
 Controla los multiplicadores de daño para todas las entidades y daño ambiental.
@@ -35,6 +35,26 @@ Controla los multiplicadores de daño para todas las entidades y daño ambiental
     "fall": 1.5,
     "lava": 2.0
   }
+}
+```
+
+### `config/dedsafio_elensito_changes.json`
+Controla características especiales del juego.
+
+**Opciones disponibles:**
+```json
+{
+  "_comment_button_damage": "Daño que recibe el jugador al pulsar un botón",
+  "button_damage": 2.0,
+  
+  "_comment_radiacion": "Si es true, los cultivos no crecerán por paso de ticks",
+  "radiacion": false,
+  
+  "_comment_mobs_pacificos": "Si es true, los mobs pacíficos atacarán a los jugadores",
+  "mobs_pacificos_agresivos": false,
+  
+  "_comment_daño_mobs_pacificos": "Daño que hacen todos los mobs pacíficos cuando están agresivos",
+  "daño_mobs_pacificos": 2.0
 }
 ```
 
@@ -141,5 +161,38 @@ Cambia todos los multiplicadores a `1.0` en el archivo de configuración y recar
 2. **Bosses más peligrosos** - Aumenta el desafío de Ender Dragon, Wither y Warden
 3. **Daño ambiental** - Haz que caídas, fuego y lava sean más peligrosos
 4. **Estrategia requerida** - Necesitarás mejor equipo y planificación
+5. **Botones peligrosos** - Pulsar botones puede hacer daño configurable
+6. **Radiación** - Opción para detener el crecimiento de cultivos
+7. **Mobs pacíficos agresivos** - Haz que vacas, cerdos, ovejas y más ataquen a los jugadores
+
+## 🆕 Características Especiales
+
+### Botones Peligrosos
+Configura cuánto daño recibe un jugador al pulsar un botón:
+```json
+{
+  "button_damage": 2.0
+}
+```
+Útil para crear trampas o desafíos en mapas de aventura.
+
+### Sistema de Radiación
+Activa la radiación para detener el crecimiento de cultivos:
+```json
+{
+  "radiacion": true
+}
+```
+Crea un escenario post-apocalíptico donde los cultivos no crecen naturalmente.
+
+### Mobs Pacíficos Agresivos
+Convierte mobs pacíficos en amenazas:
+```json
+{
+  "mobs_pacificos_agresivos": true,
+  "daño_mobs_pacificos": 3.0
+}
+```
+Todos los mobs pacíficos (vacas, cerdos, ovejas, etc.) atacarán a los jugadores y harán el daño configurado.
 
 ¡Disfruta del desafío! 🎮
