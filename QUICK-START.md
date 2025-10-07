@@ -54,7 +54,10 @@ Controla características especiales del juego.
   "mobs_pacificos_agresivos": false,
   
   "_comment_daño_mobs_pacificos": "Daño que hacen todos los mobs pacíficos cuando están agresivos",
-  "daño_mobs_pacificos": 2.0
+  "daño_mobs_pacificos": 2.0,
+  
+  "_comment_velocidad_hambre": "Porcentaje de velocidad del hambre (100 = normal, 200 = doble, 50 = mitad, 0 = no baja)",
+  "velocidad_hambre_porcentaje": 100.0
 }
 ```
 
@@ -194,5 +197,19 @@ Convierte mobs pacíficos en amenazas:
 }
 ```
 Todos los mobs pacíficos (vacas, cerdos, ovejas, etc.) atacarán a los jugadores y harán el daño configurado.
+
+### Velocidad del Hambre
+Controla qué tan rápido baja la barra de hambre:
+```json
+{
+  "velocidad_hambre_porcentaje": 200.0
+}
+```
+- `100.0` = Velocidad normal
+- `200.0` = El hambre baja al doble de velocidad
+- `50.0` = El hambre baja a la mitad de velocidad
+- `0.0` = El hambre no baja (modo creativo efectivo)
+
+Perfecto para crear modos de supervivencia extrema o relajada.
 
 ¡Disfruta del desafío! 🎮

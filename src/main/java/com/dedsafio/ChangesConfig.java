@@ -19,6 +19,7 @@ public class ChangesConfig {
 	private static boolean radiacion = false;
 	private static boolean mobsPacificosAgresivos = false;
 	private static float dañoMobsPacificos = 2.0f;
+	private static float velocidadHambre = 100.0f; // Porcentaje (100 = normal, 200 = doble velocidad, 50 = mitad)
 
 	public static void loadConfig() {
 		if (!CONFIG_FILE.getParentFile().exists()) {
@@ -52,9 +53,14 @@ public class ChangesConfig {
 				dañoMobsPacificos = config.get("daño_mobs_pacificos").getAsFloat();
 			}
 
+			// Load velocidad hambre setting
+			if (config.has("velocidad_hambre_porcentaje")) {
+				velocidadHambre = config.get("velocidad_hambre_porcentaje").getAsFloat();
+			}
+
 			DedsafioElensitoMod.LOGGER.info("Changes configuration loaded successfully! " +
-				"Button Damage: {}, Radiacion: {}, Mobs Pacificos Agresivos: {}, Daño Mobs Pacificos: {}",
-				buttonDamage, radiacion, mobsPacificosAgresivos, dañoMobsPacificos);
+				"Button Damage: {}, Radiacion: {}, Mobs Pacificos Agresivos: {}, Daño Mobs Pacificos: {}, Velocidad Hambre: {}%",
+				buttonDamage, radiacion, mobsPacificosAgresivos, dañoMobsPacificos, velocidadHambre);
 		} catch (IOException e) {
 			DedsafioElensitoMod.LOGGER.error("Failed to load changes configuration", e);
 			throw new RuntimeException("Failed to load changes configuration", e);
@@ -76,6 +82,9 @@ public class ChangesConfig {
 		
 		config.addProperty("_comment_daño_mobs_pacificos", "Daño que hacen todos los mobs pacíficos cuando están agresivos");
 		config.addProperty("daño_mobs_pacificos", 2.0f);
+		
+		config.addProperty("_comment_velocidad_hambre", "Porcentaje de velocidad del hambre (100 = normal, 200 = doble velocidad, 50 = mitad, 0 = no baja)");
+		config.addProperty("velocidad_hambre_porcentaje", 100.0f);
 
 		try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
 			GSON.toJson(config, writer);
@@ -99,6 +108,10 @@ public class ChangesConfig {
 
 	public static float getDañoMobsPacificos() {
 		return dañoMobsPacificos;
+	}
+
+	public static float getVelocidadHambre() {
+		return velocidadHambre;
 	}
 
 	public static void setButtonDamage(float damage) {
@@ -135,6 +148,9 @@ public class ChangesConfig {
 		
 		config.addProperty("_comment_daño_mobs_pacificos", "Daño que hacen todos los mobs pacíficos cuando están agresivos");
 		config.addProperty("daño_mobs_pacificos", dañoMobsPacificos);
+		
+		config.addProperty("_comment_velocidad_hambre", "Porcentaje de velocidad del hambre (100 = normal, 200 = doble velocidad, 50 = mitad, 0 = no baja)");
+		config.addProperty("velocidad_hambre_porcentaje", velocidadHambre);
 
 		try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
 			GSON.toJson(config, writer);

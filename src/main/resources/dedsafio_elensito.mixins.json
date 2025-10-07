@@ -8,12 +8,14 @@
 		"ButtonBlockMixin",
 		"CocoaBlockMixin",
 		"CropBlockMixin",
+		"HungerManagerMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
 		"NetherWartBlockMixin",
 		"StemBlockMixin"
 	],
 	"client": [
+		"HungerManagerMixin",
 		"LivingEntityMixin"
 	],
 	"injectors": {

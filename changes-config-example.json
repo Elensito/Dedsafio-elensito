@@ -1,0 +1,16 @@
+{
+  "_comment_button_damage": "Daño que recibe el jugador al pulsar un botón",
+  "button_damage": 2.0,
+  
+  "_comment_radiacion": "Si es true, los cultivos no crecerán por paso de ticks",
+  "radiacion": false,
+  
+  "_comment_mobs_pacificos": "Si es true, los mobs pacíficos atacarán a los jugadores",
+  "mobs_pacificos_agresivos": false,
+  
+  "_comment_daño_mobs_pacificos": "Daño que hacen todos los mobs pacíficos cuando están agresivos",
+  "daño_mobs_pacificos": 2.0,
+  
+  "_comment_velocidad_hambre": "Porcentaje de velocidad del hambre (100 = normal, 200 = doble velocidad, 50 = mitad, 0 = no baja)",
+  "velocidad_hambre_porcentaje": 100.0
+}
