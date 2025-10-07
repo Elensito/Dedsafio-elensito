@@ -20,6 +20,7 @@ public class ChangesConfig {
 	private static boolean mobsPacificosAgresivos = false;
 	private static float dañoMobsPacificos = 2.0f;
 	private static float velocidadHambre = 100.0f; // Porcentaje (100 = normal, 200 = doble velocidad, 50 = mitad)
+	private static int creeperFuseTime = 30; // Tiempo en ticks antes de explotar (30 = 1.5 segundos, valor vanilla)
 
 	public static void loadConfig() {
 		if (!CONFIG_FILE.getParentFile().exists()) {
@@ -58,9 +59,15 @@ public class ChangesConfig {
 				velocidadHambre = config.get("velocidad_hambre_porcentaje").getAsFloat();
 			}
 
+			// Load creeper fuse time setting
+			if (config.has("creeper_fuse_time")) {
+				creeperFuseTime = config.get("creeper_fuse_time").getAsInt();
+			}
+
 			DedsafioElensitoMod.LOGGER.info("Changes configuration loaded successfully! " +
-				"Button Damage: {}, Radiacion: {}, Mobs Pacificos Agresivos: {}, Daño Mobs Pacificos: {}, Velocidad Hambre: {}%",
-				buttonDamage, radiacion, mobsPacificosAgresivos, dañoMobsPacificos, velocidadHambre);
+				"Button Damage: {}, Radiacion: {}, Mobs Pacificos Agresivos: {}, Daño Mobs Pacificos: {}, Velocidad Hambre: {}%, " +
+				"Creeper Fuse Time: {} ticks",
+				buttonDamage, radiacion, mobsPacificosAgresivos, dañoMobsPacificos, velocidadHambre, creeperFuseTime);
 		} catch (IOException e) {
 			DedsafioElensitoMod.LOGGER.error("Failed to load changes configuration", e);
 			throw new RuntimeException("Failed to load changes configuration", e);
@@ -70,21 +77,12 @@ public class ChangesConfig {
 	private static void createDefaultConfig() {
 		JsonObject config = new JsonObject();
 		
-		// Default values with descriptions
-		config.addProperty("_comment_button_damage", "Daño que recibe el jugador al pulsar un botón");
 		config.addProperty("button_damage", 2.0f);
-		
-		config.addProperty("_comment_radiacion", "Si es true, los cultivos no crecerán por paso de ticks");
 		config.addProperty("radiacion", false);
-		
-		config.addProperty("_comment_mobs_pacificos", "Si es true, los mobs pacíficos atacarán a los jugadores");
 		config.addProperty("mobs_pacificos_agresivos", false);
-		
-		config.addProperty("_comment_daño_mobs_pacificos", "Daño que hacen todos los mobs pacíficos cuando están agresivos");
 		config.addProperty("daño_mobs_pacificos", 2.0f);
-		
-		config.addProperty("_comment_velocidad_hambre", "Porcentaje de velocidad del hambre (100 = normal, 200 = doble velocidad, 50 = mitad, 0 = no baja)");
 		config.addProperty("velocidad_hambre_porcentaje", 100.0f);
+		config.addProperty("creeper_fuse_time", 30);
 
 		try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
 			GSON.toJson(config, writer);
@@ -114,6 +112,10 @@ public class ChangesConfig {
 		return velocidadHambre;
 	}
 
+	public static int getCreeperFuseTime() {
+		return creeperFuseTime;
+	}
+
 	public static void setButtonDamage(float damage) {
 		buttonDamage = damage;
 		saveConfig();
@@ -137,20 +139,12 @@ public class ChangesConfig {
 	private static void saveConfig() {
 		JsonObject config = new JsonObject();
 		
-		config.addProperty("_comment_button_damage", "Daño que recibe el jugador al pulsar un botón");
 		config.addProperty("button_damage", buttonDamage);
-		
-		config.addProperty("_comment_radiacion", "Si es true, los cultivos no crecerán por paso de ticks");
 		config.addProperty("radiacion", radiacion);
-		
-		config.addProperty("_comment_mobs_pacificos", "Si es true, los mobs pacíficos atacarán a los jugadores");
 		config.addProperty("mobs_pacificos_agresivos", mobsPacificosAgresivos);
-		
-		config.addProperty("_comment_daño_mobs_pacificos", "Daño que hacen todos los mobs pacíficos cuando están agresivos");
 		config.addProperty("daño_mobs_pacificos", dañoMobsPacificos);
-		
-		config.addProperty("_comment_velocidad_hambre", "Porcentaje de velocidad del hambre (100 = normal, 200 = doble velocidad, 50 = mitad, 0 = no baja)");
 		config.addProperty("velocidad_hambre_porcentaje", velocidadHambre);
+		config.addProperty("creeper_fuse_time", creeperFuseTime);
 
 		try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
 			GSON.toJson(config, writer);

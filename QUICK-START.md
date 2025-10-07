@@ -212,4 +212,32 @@ Controla qué tan rápido baja la barra de hambre:
 
 Perfecto para crear modos de supervivencia extrema o relajada.
 
+### Creepers Charged
+Controla la probabilidad de que creepers spawneen como charged:
+```json
+{
+  "charged_creeper_probability": 25.0
+}
+```
+- `0.0` = Ningún creeper será charged (vanilla)
+- `25.0` = 25% de probabilidad de ser charged
+- `50.0` = 50% de probabilidad de ser charged
+- `100.0` = Todos los creepers serán charged
+
+Solo afecta a creepers que spawnean naturalmente, de chunks o de spawners.
+
+### Tiempo de Explosión de Creepers
+Configura cuánto tiempo tarda un creeper en explotar:
+```json
+{
+  "creeper_fuse_time": 20
+}
+```
+- `30` = Tiempo vanilla (1.5 segundos)
+- `20` = Explosión más rápida (1 segundo)
+- `15` = Explosión muy rápida (0.75 segundos)
+- `60` = Explosión lenta (3 segundos)
+
+Perfecto para aumentar o disminuir el desafío de los creepers.
+
 ¡Disfruta del desafío! 🎮
